@@ -1,0 +1,56 @@
+﻿@model IntraVision_Demo.ViewModels.PrivacyViewModel
+@{
+    ViewData["Title"] = "Admin Interface";
+}
+
+<div class="text-center">
+   <h2>Баланс машины: <b id="VMBalance">@Model.VendingMachineBalance</b></h2>
+   <div class="table-responsive">
+      <table class="table">
+        <tr>
+            <th>Монета</th>
+            <th>Номинал</th>
+            <th>Количество</th>
+            <th>Активна</th>
+       </tr>
+        @foreach(Coin coin in Model.Coins)
+        { 
+            <tr>
+                <form asp-action="EditCoin" asp-controller="Home" >
+                <td><input asp-for="@coin.Name" type="text" ></td>
+                <td><input asp-for="@coin.Amount" type="number" ></td>
+                <td><input asp-for="@coin.Count" type="number" ></td>
+                <td><input type="checkbox" asp-for="@coin.IsActive"></td>
+                <td><input asp-for="@coin.Id" type="number" hidden></td>
+                <td><input asp-for="@coin.VendingMachineId" type="number" hidden></td>
+                <td><input type="submit" value="Сохранить"/></td>                
+                </form>
+            </tr>
+        }
+      </table>
+    </div>
+      <div class="table-responsive">
+      <table class="table">
+            <tr>
+                <th>Название</th>
+                <th>Расположение картинки</th>
+                <th>Цена</th>
+                <th>Осталось</th>
+           </tr>
+            @foreach(Drink drink in Model.Drinks)
+            { 
+                <tr>
+                    <form asp-action="EditDrink" asp-controller="Home">
+                    <td><input asp-for="@drink.Name" type="text" ></td>
+                    <td><input asp-for="@drink.PictureURL" type="url" ></td>
+                    <td><input asp-for="@drink.Price" type="number" ></td>
+                    <td><input asp-for="@drink.Count" type="number" ></td>
+                    <td><input asp-for="@drink.Id" type="number" hidden></td>
+                    <td><input asp-for="@drink.VendingMachineId" type="number" hidden></td>
+                    <td><input type="submit" value="Сохранить"/></td>
+                    </form>
+                </tr>
+            }
+      </table>
+    </div>
+</div>

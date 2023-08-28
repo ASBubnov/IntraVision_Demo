@@ -1,0 +1,55 @@
+﻿@model IntraVision_Demo.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "UserInterface";
+}
+
+<div class="text-center">
+   <h2>Баланс пользователя: <b id="UserBalance">@Model.UserBalance</b></h2>
+   <div class="table-responsive">
+      <table class="table">
+        <tr>
+        <th>Монета</th>
+        <th>Номинал</th>
+        <th></th>
+       </tr>
+        @foreach(Coin coin in Model.ActiveCoins)
+        { 
+            <tr>
+                <td>@coin.Name</td>
+                <td>@coin.Amount ₽</td>
+                @if(@coin.IsActive)
+                {   
+                  <td><button class="SetUserBalance" type="button">Внести</button></td>
+                }
+                else
+                {
+                    <td><button class="SetUserBalance" type="button" disabled>Внести</button></td>
+                }  
+                <td id="coinId" hidden>@coin.Id</td>
+            </tr>
+        }
+      </table>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+        <th>Название</th>
+        <th>Изображение</th>
+        <th>Цена</th>
+        <th>Осталось</th>
+       </tr>
+        @foreach(Drink drink in Model.Drinks)
+        { 
+            <tr>
+                <td>@drink.Name</td>
+                <td><img src="@drink.PictureURL"></td>
+                <td>@drink.Price ₽</td>
+                <td class="DrinkCount">@drink.Count</td>
+                <td><button class="BuyDrink">Купить</button></td>
+                <td hidden>@drink.Id</td>
+            </tr>
+        }
+      </table>
+    </div>
+
+</div>
